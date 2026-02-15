@@ -1,14 +1,12 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mpf-app</title>
-    <base href="/mpf-demo/">
+    <meta charset="utf-8">
+    <title>MPF Demo App</title>
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
-      // MIT License
       // https://github.com/rafgraph/spa-github-pages
+      // This script checks to see if a redirect is present from the 404.html page
       (function(l) {
         if (l.search[1] === '/' ) {
           var decoded = l.search.slice(1).split('&').map(function(s) { 
@@ -20,10 +18,33 @@
         }
       }(window.location))
     </script>
+    <script type="text/javascript">
+      // Hash Router Mode - Redirect paths to hash
+      (function() {
+        var path = window.location.pathname;
+        var hash = window.location.hash;
+        
+        // If accessing a subpath directly (not through hash)
+        if (path.indexOf('/mpf-demo/') !== -1 && !hash && path !== '/mpf-demo/' && path !== '/mpf-demo/index.html') {
+          var route = path.replace('/mpf-demo', '');
+          if (route) {
+            window.location.href = '/mpf-demo/#' + route + window.location.search + window.location.hash;
+          }
+        }
+      })();
+    </script>
     <script type="module" crossorigin src="./assets/index-DTIfDb3J.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-CjC8gbVh.css">
+    <style>
+      /* Loading spinner */
+      .loading { display: flex; justify-content: center; align-items: center; height: 100vh; }
+      .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite; }
+      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="loading"><div class="spinner"></div></div>
+    </div>
   </body>
 </html>
